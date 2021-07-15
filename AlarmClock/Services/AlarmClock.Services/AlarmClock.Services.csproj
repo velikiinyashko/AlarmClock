@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AlarmClock.Core\AlarmClock.Core.csproj" />
+    <ProjectReference Include="..\AlarmClock.Services.Interfaces\AlarmClock.Services.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

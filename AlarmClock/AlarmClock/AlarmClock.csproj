@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>AlarmClock</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.7" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.1" />
+    <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.1.7" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlarmClock.Core\AlarmClock.Core.csproj" />
+    <ProjectReference Include="..\Modules\AlarmClock.Modules.ModuleAlarm\AlarmClock.Modules.ModuleAlarm.csproj" />
+    <ProjectReference Include="..\Modules\AlarmClock.Modules.ModuleNotification\AlarmClock.Modules.ModuleNotification.csproj" />
+    <ProjectReference Include="..\Modules\AlarmClock.Modules.ModuleSettings\AlarmClock.Modules.ModuleSettings.csproj" />
+    <ProjectReference Include="..\Modules\AlarmClock.Modules.ViewModules\AlarmClock.Modules.ViewModules.csproj" />
+    <ProjectReference Include="..\Services\AlarmClock.Services.Interfaces\AlarmClock.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Services\AlarmClock.Services\AlarmClock.Services.csproj" />
+  </ItemGroup>
+</Project>

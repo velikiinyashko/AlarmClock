@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="AlarmClock.Modules.ViewModules.Views.MainViewWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <StackPanel>
+            <Label Foreground="White" FontSize="48" Content="{Binding ClockLabel}"/>
+            <TextBlock Text="main" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

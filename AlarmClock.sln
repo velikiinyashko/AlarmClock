@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A1E78010-8910-4ABE-9494-ED02EFAE749E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlarmClock.Modules.ModuleName.Tests", "AlarmClock\Tests\AlarmClock.Modules.ModuleName.Tests\AlarmClock.Modules.ModuleName.Tests.csproj", "{DC7B4748-7AB0-484E-ACDD-2FED7C8B29F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{281C0A73-91A3-410B-875F-9164273BF97B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D0DDEDEB-AA7D-41A0-A770-22010AE5866F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlarmClock", "AlarmClock\AlarmClock\AlarmClock.csproj", "{BF55146F-1952-4766-BAE0-B8F67BBCC22E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlarmClock.Core", "AlarmClock\AlarmClock.Core\AlarmClock.Core.csproj", "{6C8D111C-A0CF-4FB5-B3AA-D4E2D3CDABBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmClock.Modules.ModuleNotification", "AlarmClock\Modules\AlarmClock.Modules.ModuleNotification\AlarmClock.Modules.ModuleNotification.csproj", "{B4B6CE4A-DD00-41E2-BD01-8084F3C6BAC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmClock.Modules.ModuleSettings", "AlarmClock\Modules\AlarmClock.Modules.ModuleSettings\AlarmClock.Modules.ModuleSettings.csproj", "{678381EC-E85F-429F-AF31-328996FB48AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmClock.Services", "AlarmClock\Services\AlarmClock.Services\AlarmClock.Services.csproj", "{D698BB02-22F4-428D-BFCA-94CD937296A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmClock.Services.Interfaces", "AlarmClock\Services\AlarmClock.Services.Interfaces\AlarmClock.Services.Interfaces.csproj", "{357E94F1-3CA1-4340-AA07-2DB9C3AEE576}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmClock.Modules.ViewModules", "AlarmClock\Modules\AlarmClock.Modules.ViewModules\AlarmClock.Modules.ViewModules.csproj", "{F919718D-90C5-4E2E-8D47-1B4DD278237E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmClock.Modules.ModuleAlarm", "AlarmClock\Modules\AlarmClock.Modules.ModuleAlarm\AlarmClock.Modules.ModuleAlarm.csproj", "{EF93EC64-B066-4CA9-8669-7D2D1BA45EE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC7B4748-7AB0-484E-ACDD-2FED7C8B29F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7B4748-7AB0-484E-ACDD-2FED7C8B29F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7B4748-7AB0-484E-ACDD-2FED7C8B29F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7B4748-7AB0-484E-ACDD-2FED7C8B29F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF55146F-1952-4766-BAE0-B8F67BBCC22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF55146F-1952-4766-BAE0-B8F67BBCC22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF55146F-1952-4766-BAE0-B8F67BBCC22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF55146F-1952-4766-BAE0-B8F67BBCC22E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C8D111C-A0CF-4FB5-B3AA-D4E2D3CDABBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8D111C-A0CF-4FB5-B3AA-D4E2D3CDABBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8D111C-A0CF-4FB5-B3AA-D4E2D3CDABBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8D111C-A0CF-4FB5-B3AA-D4E2D3CDABBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B6CE4A-DD00-41E2-BD01-8084F3C6BAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B6CE4A-DD00-41E2-BD01-8084F3C6BAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B6CE4A-DD00-41E2-BD01-8084F3C6BAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B6CE4A-DD00-41E2-BD01-8084F3C6BAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{678381EC-E85F-429F-AF31-328996FB48AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678381EC-E85F-429F-AF31-328996FB48AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678381EC-E85F-429F-AF31-328996FB48AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678381EC-E85F-429F-AF31-328996FB48AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D698BB02-22F4-428D-BFCA-94CD937296A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D698BB02-22F4-428D-BFCA-94CD937296A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D698BB02-22F4-428D-BFCA-94CD937296A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D698BB02-22F4-428D-BFCA-94CD937296A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357E94F1-3CA1-4340-AA07-2DB9C3AEE576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357E94F1-3CA1-4340-AA07-2DB9C3AEE576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357E94F1-3CA1-4340-AA07-2DB9C3AEE576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357E94F1-3CA1-4340-AA07-2DB9C3AEE576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F919718D-90C5-4E2E-8D47-1B4DD278237E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F919718D-90C5-4E2E-8D47-1B4DD278237E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F919718D-90C5-4E2E-8D47-1B4DD278237E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F919718D-90C5-4E2E-8D47-1B4DD278237E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF93EC64-B066-4CA9-8669-7D2D1BA45EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF93EC64-B066-4CA9-8669-7D2D1BA45EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF93EC64-B066-4CA9-8669-7D2D1BA45EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF93EC64-B066-4CA9-8669-7D2D1BA45EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC7B4748-7AB0-484E-ACDD-2FED7C8B29F4} = {A1E78010-8910-4ABE-9494-ED02EFAE749E}
+		{B4B6CE4A-DD00-41E2-BD01-8084F3C6BAC9} = {281C0A73-91A3-410B-875F-9164273BF97B}
+		{678381EC-E85F-429F-AF31-328996FB48AD} = {281C0A73-91A3-410B-875F-9164273BF97B}
+		{D698BB02-22F4-428D-BFCA-94CD937296A7} = {D0DDEDEB-AA7D-41A0-A770-22010AE5866F}
+		{357E94F1-3CA1-4340-AA07-2DB9C3AEE576} = {D0DDEDEB-AA7D-41A0-A770-22010AE5866F}
+		{F919718D-90C5-4E2E-8D47-1B4DD278237E} = {281C0A73-91A3-410B-875F-9164273BF97B}
+		{EF93EC64-B066-4CA9-8669-7D2D1BA45EE4} = {281C0A73-91A3-410B-875F-9164273BF97B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D390B8AF-1046-4582-A85B-6112DB0668D6}
+	EndGlobalSection
+EndGlobal
