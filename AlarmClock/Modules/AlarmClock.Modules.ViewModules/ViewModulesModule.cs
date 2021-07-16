@@ -16,13 +16,11 @@ namespace AlarmClock.Modules.ViewModules
         }
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            //_regionManager.RequestNavigate(RegionNames.AlarmsRegion, "Alarms");
             _regionManager.RequestNavigate(RegionNames.ContentRegion, "Main");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.RegisterForNavigation<AlarmView>("Alarms");
             containerRegistry.RegisterForNavigation<MainViewWindow>("Main");
         }
     }

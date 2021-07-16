@@ -8,6 +8,7 @@ using AlarmClock.Services.Interfaces;
 using Prism.Regions;
 using AlarmClock.Core.Event;
 using Prism.Events;
+using AlarmClock.Core.CommandModule;
 
 namespace AlarmClock.Modules.ViewModules.ViewModels
 {
@@ -15,8 +16,8 @@ namespace AlarmClock.Modules.ViewModules.ViewModels
     {
         private string _clockLabel;
         public string ClockLabel { get => _clockLabel; set { SetProperty(ref _clockLabel, value); } }
-        public MainViewWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, INotifyIcon notify):
-            base(regionManager, eventAggregator, notify)
+        public MainViewWindowViewModel(IRegionManager regionManager,ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify):
+            base(regionManager,commandCore, eventAggregator, notify)
         {
             EventAggregator.GetEvent<TimeTickEvent>().Subscribe(VisualTime);
         }

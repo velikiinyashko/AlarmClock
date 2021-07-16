@@ -10,6 +10,7 @@ using System;
 using ControlzEx.Theming;
 using AlarmClock.Modules.ViewModules;
 using AlarmClock.Modules.ModuleAlarm;
+using AlarmClock.Core.CommandModule;
 
 namespace AlarmClock
 {
@@ -28,6 +29,7 @@ namespace AlarmClock
         {
             containerRegistry.RegisterSingleton<INotifyIcon, NotifyIcons>();
             containerRegistry.RegisterScoped<ITimeClockManagerService, TimeClockManagerService>();
+            containerRegistry.RegisterSingleton<ICommandCore, CommandCore>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

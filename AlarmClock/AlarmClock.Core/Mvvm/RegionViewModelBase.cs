@@ -2,6 +2,8 @@
 using System;
 using AlarmClock.Services.Interfaces;
 using Prism.Events;
+using AlarmClock.Core.CommandModule;
+using Prism.Commands;
 
 namespace AlarmClock.Core.Mvvm
 {
@@ -10,12 +12,18 @@ namespace AlarmClock.Core.Mvvm
         protected IRegionManager RegionManager { get; private set; }
         protected INotifyIcon Notify { get; private set; }
         protected IEventAggregator EventAggregator { get; private set; }
+        protected ICommandCore CommandCore { get; private set; }
+        public DelegateCommand AlarmViewCommand { get; private set; }
+        public DelegateCommand AlaramAddCommand { get; private set; }
 
-        public RegionViewModelBase(IRegionManager regionManager, IEventAggregator eventAggregator, INotifyIcon notify)
+        public RegionViewModelBase(IRegionManager regionManager,ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify)
         {
+            CommandCore = commandCore;
             RegionManager = regionManager;
             Notify = notify;
             EventAggregator = eventAggregator;
+            AlarmViewCommand = new(AlarmsView);
+            AlaramAddCommand = new(AlarmAdd);
         }
 
         public RegionViewModelBase(IRegionManager regionManager, INotifyIcon notify)
@@ -23,8 +31,19 @@ namespace AlarmClock.Core.Mvvm
             RegionManager = regionManager;
             Notify = notify;
         }
-        
 
+        #region комманды
+
+        protected virtual void AlarmsView() { }
+       /// <summary>
+       /// добавление будильника
+       /// </summary>
+        protected virtual void AlarmAdd() { }
+
+        #endregion
+
+
+        #region навигация
         public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
         {
             continuationCallback(true);
@@ -44,5 +63,6 @@ namespace AlarmClock.Core.Mvvm
         {
 
         }
+        #endregion
     }
 }

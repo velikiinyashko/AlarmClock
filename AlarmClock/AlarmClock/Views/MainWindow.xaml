@@ -6,23 +6,50 @@
         xmlns:core="clr-namespace:AlarmClock.Core;assembly=AlarmClock.Core"
         xmlns:Сontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="{Binding Title}" Height="350" Width="525" >
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="{Binding Title}" Height="350" Width="525" 
+                      WindowStyle="None"
+                      WindowState="Maximized">
     <Сontrols:MetroWindow.RightWindowCommands>
         <Сontrols:WindowCommands>
-            <Button>
-                <materialDesign:PackIcon Kind="Settings"/>
+            <Button Command="{Binding AlarmViewCommand}" ToolTip="Будильник">
+                <md:PackIcon Kind="Alarm" />
+            </Button>
+            <Button ToolTip="Настройки">
+                <md:PackIcon Kind="Settings"/>
             </Button>
         </Сontrols:WindowCommands>
     </Сontrols:MetroWindow.RightWindowCommands>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-        <ContentControl Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.AlarmsRegion}" />
-        
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.AlarmsRegion}" Visibility="Visible"/>
+        <md:DialogHost Grid.RowSpan="2"
+              IsOpen="False"
+              CloseOnClickAway="True"
+              OverlayBackground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+              DialogTheme="Inherit">
+            <md:DialogHost.DialogContent>
+                <Grid Margin="5" Width="200" Height="200" MinWidth="520">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="220"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Vertical" Height="auto" Width="auto" VerticalAlignment="Center">
+                        <TextBox Margin="5" md:HintAssist.Hint="Название будильника" Foreground="White" Text="{Binding NameAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <md:TimePicker Is24Hours="True" Margin="5" md:HintAssist.Hint="Время будильника" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Content="save" Margin="5"/>
+                        <Button Content="cancel" Margin="5"/>
+                    </StackPanel>
+                </Grid>
+            </md:DialogHost.DialogContent>
+        </md:DialogHost>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
     </Grid>
 </Сontrols:MetroWindow>
