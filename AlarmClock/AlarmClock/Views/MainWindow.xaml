@@ -7,10 +7,12 @@
         xmlns:Сontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="{Binding Title}" Height="350" Width="525" 
+        Title="{Binding Title}" MinHeight="500" MinWidth="525"
+                      Height="500" Width="525"
                       WindowStyle="None"
-                      WindowState="Maximized">
-    <Сontrols:MetroWindow.RightWindowCommands>
+                      WindowState="Normal">
+
+    <!--<Сontrols:MetroWindow.RightWindowCommands>
         <Сontrols:WindowCommands>
             <Button Command="{Binding AlarmViewCommand}" ToolTip="Будильник">
                 <md:PackIcon Kind="Alarm" />
@@ -19,25 +21,52 @@
                 <md:PackIcon Kind="Settings"/>
             </Button>
         </Сontrols:WindowCommands>
-    </Сontrols:MetroWindow.RightWindowCommands>
+    </Сontrols:MetroWindow.RightWindowCommands>-->
+              <!--IsOpen="{Binding DialogVisible}"-->
     <Grid>
         <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.AlarmsRegion}" Visibility="Visible"/>
-        <md:Snackbar  Width="auto" MessageQueue="{Binding MessageQueue}"/>
+        <md:Snackbar Grid.Row="1" Width="auto" Background="{StaticResource MahApps.Brushes.Accent}" MessageQueue="{Binding MessageQueue}"/>
         <md:DialogHost Grid.RowSpan="2"
-              IsOpen="{Binding DialogVisible}"
               CloseOnClickAway="True"
+                       IsOpen="{Binding DialogVisible}"
               OverlayBackground="{DynamicResource PrimaryHueDarkForegroundBrush}"
               DialogTheme="Inherit">
             <md:DialogHost.DialogContent>
-                <Grid Margin="5" Width="200" Height="200" MinWidth="520">
-                    <StackPanel Orientation="Vertical">
-                        <TextBox Text="{Binding Alarm.Name}"/>
-                        <md:TimePicker SelectedTime="{Binding Alarm.Time}" Is24Hours="True"/>
-                        <CheckBox Content="{Binding Alarm.IsEnable}" Style="{StaticResource MaterialDesignDarkCheckBox}"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
-                            <Button Content="Save" Command="{Binding SaveAlarmCommand}"/>
+                <Grid Margin="5" Width="200" Height="200" MinWidth="350">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center" Margin="10">
+                            <TextBox Margin="10"
+                                     Text="{Binding Alarm.Name}"
+                                     md:HintAssist.Hint="Название будильника"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                            
+                            <md:TimePicker Margin="10"
+                                           md:HintAssist.Hint="Время будильника в формате (HH:mm)"
+                                           Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                           SelectedTimeFormat ="Short" SelectedTime="{Binding Alarm.Time}"
+                                           Language="ru-Ru" 
+                                           Is24Hours="True" 
+                                           />                            
                         </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" Margin="10">
+                            <ToggleButton Grid.Column="1"
+                                          Margin="0 20 0 0"
+                                          IsChecked="{Binding Alarm.IsEnable}"
+                                          ToolTip="Включение будильника" 
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+                        <Button Content="Сохранить" Width="300" Command="{Binding SaveAlarmCommand}"/>
                     </StackPanel>
                 </Grid>
             </md:DialogHost.DialogContent>

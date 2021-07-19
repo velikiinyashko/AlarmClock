@@ -6,6 +6,7 @@ using AlarmClock.Core;
 
 namespace AlarmClock.Modules.ModuleSettings
 {
+
     public class ModuleSettingsModule : IModule
     {
         private readonly IRegionManager _regionManager;

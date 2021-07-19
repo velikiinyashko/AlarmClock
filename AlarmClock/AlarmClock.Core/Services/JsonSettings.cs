@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace AlarmClock.Core.Services
 {
+    /// <summary>
+    /// класс работы с json файлами
+    /// </summary>
+    /// <typeparam name="T">класс для сериалицации данных</typeparam>
     public class JsonSettings<T>
     {
 
@@ -19,7 +23,12 @@ namespace AlarmClock.Core.Services
         {
             _eventAggregator = eventAggregator;
         }
-
+        /// <summary>
+        /// загрузка и десериализация данныз
+        /// </summary>
+        /// <param name="fileName">имя файла в корне приложения</param>
+        /// <param name="def">сущность по умолчанию</param>
+        /// <returns></returns>
         public async Task<T> LoadConfig(string fileName, T def)
         {
             string _configPath = $"{Directory.GetCurrentDirectory()}\\{fileName}";
@@ -30,9 +39,8 @@ namespace AlarmClock.Core.Services
                 {
                     using (FileStream stream = File.OpenRead(_configPath))
                     {
-                        return await JsonSerializer.DeserializeAsync<T>(stream);
-                        //_eventAggregator.GetEvent<GetGlobalConfig>().Publish(T);
-                        //return Settings;
+                        var result = await JsonSerializer.DeserializeAsync<T>(stream);
+                        return result;
                     }
                 }
                 catch (Exception ex)
@@ -40,7 +48,6 @@ namespace AlarmClock.Core.Services
                     using (FileStream stream = File.Create(_configPath))
                     {
                         await JsonSerializer.SerializeAsync(stream, def);
-                        //_eventAggregator.GetEvent<GetGlobalConfig>().Publish(ConfigDefault());
                         return def;
                     }
                 }
@@ -50,12 +57,16 @@ namespace AlarmClock.Core.Services
                 using (FileStream stream = File.Create(_configPath))
                 {
                     await JsonSerializer.SerializeAsync(stream, def);
-                    //_eventAggregator.GetEvent<GetGlobalConfig>().Publish(ConfigDefault());
                     return def;
                 }
             }
         }
-
+        /// <summary>
+        /// сохранение данных
+        /// </summary>
+        /// <param name="fileName">имя файла для записи</param>
+        /// <param name="settings">данные для записи</param>
+        /// <returns></returns>
         public async Task SaveConfig(string fileName ,T settings)
         {
             try
@@ -65,7 +76,6 @@ namespace AlarmClock.Core.Services
                 using (FileStream stream = File.Create(_configPath))
                 {
                     await JsonSerializer.SerializeAsync(stream, settings);
-                    //_eventAggregator.GetEvent<GetGlobalConfig>().Publish(settings);
                 }
             }
             catch (Exception ex)
@@ -73,20 +83,5 @@ namespace AlarmClock.Core.Services
 
             }
         }
-
-        //private Settings ConfigDefault()
-        //{
-        //    Settings settings = new Settings();
-        //    settings.Server = "http://localhost";
-        //    settings.Port = 5000;
-        //    settings.TokenSecurity = Guid.NewGuid().ToString();
-        //    Settings = settings;
-        //    return settings;
-        //}
-
-
-
-
-
     }
 }

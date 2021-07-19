@@ -8,6 +8,5 @@ namespace AlarmClock.Core.Interfaces
 {    public interface INotifyIcon
     {
         void Message(string Message);
-        void Exit();
     }
 }

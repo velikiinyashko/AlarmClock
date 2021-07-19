@@ -16,7 +16,9 @@ namespace AlarmClock.Core.Mvvm
         public DelegateCommand AlarmViewCommand { get; private set; }
         public DelegateCommand AlaramAddCommand { get; private set; }
         public DelegateCommand DeleteAlarmCommand { get; private set; }
+        public DelegateCommand SaveAlarmCommand { get; private set; }
 
+        #region
         public RegionViewModelBase(IRegionManager regionManager, ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify)
         {
             CommandCore = commandCore;
@@ -26,6 +28,7 @@ namespace AlarmClock.Core.Mvvm
             AlarmViewCommand = new(AlarmsView);
             AlaramAddCommand = new(AlarmAdd);
             DeleteAlarmCommand = new(DeleteAlarm);
+            SaveAlarmCommand = new(SaveAlarm);
         }
 
         public RegionViewModelBase(IRegionManager regionManager, INotifyIcon notify)
@@ -33,9 +36,13 @@ namespace AlarmClock.Core.Mvvm
             RegionManager = regionManager;
             Notify = notify;
         }
+        #endregion
+
 
         #region комманды
-
+        /// <summary>
+        /// команда отображения будильника
+        /// </summary>
         protected virtual void AlarmsView() { }
 
         /// <summary>
@@ -47,6 +54,10 @@ namespace AlarmClock.Core.Mvvm
         /// удаление будильника
         /// </summary>
         protected virtual void DeleteAlarm() { }
+        /// <summary>
+        /// команда сохранения будильника
+        /// </summary>
+        protected virtual void SaveAlarm() { }
 
         #endregion
 

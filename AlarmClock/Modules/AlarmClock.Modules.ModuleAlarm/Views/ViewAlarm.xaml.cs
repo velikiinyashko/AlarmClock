@@ -32,10 +32,10 @@ namespace AlarmClock.Modules.ModuleAlarm.Views
 
         }
 
-        private void Chip_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("double click");
-
+            var i = (CheckBox)sender;
+            _eventAggregator.GetEvent<AddAlarmEvent>().Publish((AlarmModel)i.DataContext);
         }
     }
 }

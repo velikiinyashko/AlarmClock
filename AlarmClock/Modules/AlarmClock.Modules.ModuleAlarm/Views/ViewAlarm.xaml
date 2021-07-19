@@ -23,20 +23,26 @@
             <ItemsControl ItemsSource="{Binding AlarmList}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-
-                        <md:Chip Margin="3 2 0 2" Width="auto"
+                        <CheckBox IsChecked="{Binding IsEnable}"
+                                  Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
+                                  Checked="CheckBox_Checked"
+                                  Unchecked="CheckBox_Checked">
+                            
+                        <md:Chip Margin="0 0 -10 0" Background="{x:Null}" Width="auto"
                                  IsDeletable="True"
                                  DeleteClick="Chip_DeleteClick"
                                  Click="Chip_Click"
                                  ToolTip="Нажать чтобы изменить">
                             <md:Chip.Content>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding Time}"/>
                                     <Label Content="{Binding Name}"/>
+                                    <Label Content=":"/>
+                                    <Label Content="{Binding Time}"/>
                                 </StackPanel>
                             </md:Chip.Content>
                         </md:Chip>
 
+                        </CheckBox>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>

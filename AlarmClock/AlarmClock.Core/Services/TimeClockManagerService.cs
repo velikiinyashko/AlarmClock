@@ -4,6 +4,7 @@ using AlarmClock.Core.Models;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,11 @@ namespace AlarmClock.Core.Services
 {
     public class TimeClockManagerService : ITimeClockManagerService
     {
-        private DispatcherTimer _dispatcherTimer;
+
         private IEventAggregator _eventAggregator;
         private JsonSettings<List<AlarmModel>> _settings;
         private List<AlarmModel> _alarmsDef;
-        private List<AlarmModel> _alarms;
-        private Dictionary<Guid, Timer> alarmtimer;
+        private ObservableCollection<AlarmModel> _alarms;
         System.Media.SoundPlayer _player;
 
         public TimeClockManagerService(IEventAggregator eventAggregator)
@@ -32,34 +32,45 @@ namespace AlarmClock.Core.Services
             _settings = new(eventAggregator);
             _alarmsDef = new()
             {
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник", Time = (DateTime.Now + TimeSpan.FromMinutes(1)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm" },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник3", Time = (DateTime.Now + TimeSpan.FromMinutes(2)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm" },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник4", Time = (DateTime.Now + TimeSpan.FromMinutes(3)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm" },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник2", Time = (DateTime.Now + TimeSpan.FromMinutes(4)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm" },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = (DateTime.Now + TimeSpan.FromMinutes(5)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm" },
+                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник", Time = (DateTime.Now + TimeSpan.FromMinutes(1)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm", Status = 0 },
+                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник3", Time = (DateTime.Now + TimeSpan.FromMinutes(2)).ToString("HH:mm"), IsEnable = false, AlarmSounds = "Alarm", Status = 0 },
+                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник4", Time = (DateTime.Now + TimeSpan.FromMinutes(3)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm", Status = 0 },
+                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник2", Time = (DateTime.Now + TimeSpan.FromMinutes(4)).ToString("HH:mm"), IsEnable = false, AlarmSounds = "Alarm", Status = 0 },
+                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = (DateTime.Now + TimeSpan.FromMinutes(5)).ToString("HH:mm"), IsEnable = true, AlarmSounds = "Alarm", Status = 0 },
 
             };
-            _alarms = _settings.LoadConfig("alarms.json", _alarmsDef).Result;
-
-            //LoadAlarms();
-
+            LoadAlarms();
         }
 
-        //private 
-
+        /// <summary>
+        /// загружаем настройки будильников
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadAlarms()
         {
-        }
+            Task task = Task.Run(async () =>
+            {
+                _alarms = new(await _settings.LoadConfig("alarms.json", _alarmsDef));
 
+            });
+            //_alarms = await _settings.LoadConfig("alarms.json", _alarmsDef);
+            task.Wait();
+
+        }
+        /// <summary>
+        /// останавливаем звуковой сигнал
+        /// </summary>
+        /// <param name="obj"></param>
         private void DisableAlarm(bool obj)
         {
             if (_player != null)
             {
                 _player.Stop();
-                _player = null;
             }
         }
-
+        /// <summary>
+        /// получем текущее время
+        /// </summary>
         private void GetTime()
         {
             Task.Run(() =>
@@ -69,12 +80,38 @@ namespace AlarmClock.Core.Services
                     string TimeNow = DateTime.Now.ToString("HH:mm:ss");
                     string TimeAlarm = DateTime.Now.ToString("HH:mm");
                     _eventAggregator.GetEvent<TimeTickEvent>().Publish(TimeNow);
-                    var alarm =  _alarmsDef.FirstOrDefault(q => q.Time == TimeAlarm);
-                    if (alarm != null)
+                    //ищем будильник назначенный на текущее время
+                    if (_alarms != null)
                     {
-                        _player = new($"{Environment.CurrentDirectory}\\Sounds\\{alarm.AlarmSounds}.wav");
-                        _player.PlayLooping();
-                        _eventAggregator.GetEvent<EnableAlarmEvent>().Publish(true);
+                        try
+                        {
+                            var alarm = _alarms.FirstOrDefault(q => q.Time == TimeAlarm & q.IsEnable == true);
+                            if (alarm != null)
+                            {
+                                if (alarm.Status == 0 & alarm.IsEnable == true)
+                                {
+                                    Task.Run(() =>
+                                    {
+                                        _player = new($"{Environment.CurrentDirectory}\\Sounds\\{alarm.AlarmSounds}.wav");
+                                        _player.PlayLooping();
+                                    });
+                                    alarm.Status = 1;
+                                    _alarms.Remove(alarm);
+                                    _alarms.Add(alarm);
+                                    _eventAggregator.GetEvent<EnableAlarmEvent>().Publish(alarm);
+                                }
+                            }
+                            else
+                            {
+                                if (_player != null)
+                                    _player.Stop();
+                                foreach (var items in _alarms)
+                                {
+                                    items.Status = 0;
+                                }
+                            }
+                        }
+                        catch (Exception) { }
                     }
                 }
             });
@@ -82,13 +119,33 @@ namespace AlarmClock.Core.Services
 
         public List<AlarmModel> GetAlarmList()
         {
-            return _alarms == null ? _alarmsDef : _alarms;
+            return _alarms.ToList();
         }
-
+        /// <summary>
+        /// добавляем будильник
+        /// </summary>
+        /// <param name="alarm">сущность будильника</param>
+        /// <returns></returns>
         public async Task AddAlarm(AlarmModel alarm)
         {
-            _alarms.Add(alarm);
-            await _settings.SaveConfig("alarm.json", _alarms);
+            var item = _alarms.FirstOrDefault(q => q.Id == alarm.Id);
+            if (item == null)
+            {
+                _alarms.Add(alarm);
+                Task task = Task.Run(async() =>
+                {
+                    await _settings.SaveConfig("alarms.json", _alarms.ToList());
+                });
+            }
+            else
+            {
+                _alarms.Remove(item);
+                _alarms.Add(alarm);
+                Task task = Task.Run(async () =>
+                {
+                    await _settings.SaveConfig("alarms.json", _alarms.ToList());
+                });
+            }
         }
 
         public void RemoveAlarm(AlarmModel alarm)

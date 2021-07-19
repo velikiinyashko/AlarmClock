@@ -13,5 +13,6 @@ namespace AlarmClock.Core.Models
         public string Time { get; set; }
         public string AlarmSounds { get; set; }
         public bool IsEnable { get; set; }
+        public int Status { get; set; }
     }
 }

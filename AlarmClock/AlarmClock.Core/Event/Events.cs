@@ -37,7 +37,9 @@ namespace AlarmClock.Core.Event
     /// выключение будильника
     /// </summary>
     public class DisableAlarmEvent : PubSubEvent<bool> { }
-
+    /// <summary>
+    /// срабатываение будильника
+    /// </summary>
     public class EnableAlarmEvent : PubSubEvent<AlarmModel> { }
 
 }
