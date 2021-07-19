@@ -1,5 +1,4 @@
-﻿using AlarmClock.Services;
-using AlarmClock.Modules.ModuleNotification;
+﻿using AlarmClock.Modules.ModuleNotification;
 using AlarmClock.Views;
 using Prism.Ioc;
 using Prism.Modularity;

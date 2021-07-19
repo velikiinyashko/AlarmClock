@@ -43,7 +43,7 @@ namespace AlarmClock.Core.Services
                         return result;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     using (FileStream stream = File.Create(_configPath))
                     {
@@ -78,7 +78,7 @@ namespace AlarmClock.Core.Services
                     await JsonSerializer.SerializeAsync(stream, settings);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
