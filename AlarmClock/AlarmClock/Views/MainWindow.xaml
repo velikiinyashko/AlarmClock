@@ -22,7 +22,7 @@
             </Button>
         </Сontrols:WindowCommands>
     </Сontrols:MetroWindow.RightWindowCommands>-->
-              <!--IsOpen="{Binding DialogVisible}"-->
+    <!--IsOpen="{Binding DialogVisible}"-->
     <Grid>
         <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.AlarmsRegion}" Visibility="Visible"/>
@@ -48,14 +48,13 @@
                                      Text="{Binding Alarm.Name}"
                                      md:HintAssist.Hint="Название будильника (26 символов)"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                            
+
                             <md:TimePicker Margin="10"
                                            md:HintAssist.Hint="Время будильника в формате (HH:mm)"
                                            Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
                                            SelectedTimeFormat ="Short" SelectedTime="{Binding Alarm.Time}"
                                            Language="ru-Ru" 
-                                           Is24Hours="True" 
-                                           />                            
+                                           Is24Hours="True"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" Margin="10">
                             <ToggleButton Grid.Column="1"
