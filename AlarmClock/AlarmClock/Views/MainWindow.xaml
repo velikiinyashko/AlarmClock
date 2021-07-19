@@ -46,7 +46,7 @@
                         <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center" Margin="10">
                             <TextBox Margin="10"
                                      Text="{Binding Alarm.Name}"
-                                     md:HintAssist.Hint="Название будильника"
+                                     md:HintAssist.Hint="Название будильника (26 символов)"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                             
                             <md:TimePicker Margin="10"

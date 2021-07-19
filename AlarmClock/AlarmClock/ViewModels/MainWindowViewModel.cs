@@ -106,7 +106,7 @@ namespace AlarmClock.ViewModels
                 {
                     AlarmSounds = "Alarm",
                     Id = Alarm.Id == Guid.Empty ? Guid.NewGuid() : Alarm.Id,
-                    Name = Alarm.Name,
+                    Name = Alarm.Name.Length > 26 ? Alarm.Name.Substring(0,25) : Alarm.Name,
                     IsEnable = Alarm.IsEnable,
                     Time = time.ToString("HH:mm"),
                     Status = 0
