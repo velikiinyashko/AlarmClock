@@ -16,6 +16,10 @@ namespace AlarmClock.Modules.ViewModules.ViewModels
     {
         private string _clockLabel;
         public string ClockLabel { get => _clockLabel; set { SetProperty(ref _clockLabel, value); } }
+
+        private string _dateLabel;
+        public string DateLabel { get => _dateLabel; set { SetProperty(ref _dateLabel, value); } }
+
         public MainViewWindowViewModel(IRegionManager regionManager,ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify):
             base(regionManager,commandCore, eventAggregator, notify)
         {
@@ -24,6 +28,7 @@ namespace AlarmClock.Modules.ViewModules.ViewModels
         private void VisualTime(string obj)
         {
             ClockLabel = obj;
+            DateLabel = DateTime.Now.ToString("dddd: dd MMMM yyyy");
         }
     }
 }
