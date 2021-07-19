@@ -132,7 +132,7 @@ namespace AlarmClock.Core.Services
             if (item == null)
             {
                 _alarms.Add(alarm);
-                Task task = Task.Run(async() =>
+                Task task = Task.Run(async () =>
                 {
                     await _settings.SaveConfig("alarms.json", _alarms.ToList());
                 });
@@ -150,7 +150,14 @@ namespace AlarmClock.Core.Services
 
         public void RemoveAlarm(AlarmModel alarm)
         {
-            _alarms.Remove(alarm);
+            if (alarm != null)
+            {
+                _alarms.Remove(alarm);
+                Task task = Task.Run(async () =>
+                {
+                    await _settings.SaveConfig("alarms.json", _alarms.ToList());
+                });
+            }
         }
     }
 }
