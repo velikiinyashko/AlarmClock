@@ -3,9 +3,9 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AlarmClock.Services.Interfaces;
 using AlarmClock.Core.Mvvm;
 using Prism.Regions;
+using AlarmClock.Core.Interfaces;
 
 namespace AlarmClock.Modules.ModuleSettings.ViewModels
 {

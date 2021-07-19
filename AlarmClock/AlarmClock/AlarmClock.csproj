@@ -20,6 +20,5 @@
     <ProjectReference Include="..\Modules\AlarmClock.Modules.ModuleSettings\AlarmClock.Modules.ModuleSettings.csproj" />
     <ProjectReference Include="..\Modules\AlarmClock.Modules.ViewModules\AlarmClock.Modules.ViewModules.csproj" />
     <ProjectReference Include="..\Services\AlarmClock.Services.Interfaces\AlarmClock.Services.Interfaces.csproj" />
-    <ProjectReference Include="..\Services\AlarmClock.Services\AlarmClock.Services.csproj" />
   </ItemGroup>
 </Project>

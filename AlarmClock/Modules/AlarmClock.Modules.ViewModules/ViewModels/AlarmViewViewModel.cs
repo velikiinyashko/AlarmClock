@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AlarmClock.Core.Mvvm;
 using Prism.Regions;
-using AlarmClock.Services.Interfaces;
+using AlarmClock.Core.Interfaces;
 
 namespace AlarmClock.Modules.ViewModules.ViewModels
 {

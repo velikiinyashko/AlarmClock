@@ -1,5 +1,4 @@
 ﻿using AlarmClock.Services;
-using AlarmClock.Services.Interfaces;
 using AlarmClock.Modules.ModuleNotification;
 using AlarmClock.Views;
 using Prism.Ioc;
@@ -11,6 +10,8 @@ using ControlzEx.Theming;
 using AlarmClock.Modules.ViewModules;
 using AlarmClock.Modules.ModuleAlarm;
 using AlarmClock.Core.CommandModule;
+using AlarmClock.Core.Interfaces;
+using AlarmClock.Core.Services;
 
 namespace AlarmClock
 {

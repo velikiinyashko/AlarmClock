@@ -6,9 +6,11 @@ using System.Linq;
 using AlarmClock.Core.Mvvm;
 using AlarmClock.Core.CommandModule;
 using AlarmClock.Core.Models;
-using AlarmClock.Services.Interfaces;
+using AlarmClock.Core.Event;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using Prism.Events;
+using AlarmClock.Core.Interfaces;
 
 namespace AlarmClock.Modules.ModuleAlarm.ViewModels
 {
@@ -20,26 +22,40 @@ namespace AlarmClock.Modules.ModuleAlarm.ViewModels
         private ObservableCollection<AlarmModel> _alarmList;
         public ObservableCollection<AlarmModel> AlarmList { get => _alarmList; set { SetProperty(ref _alarmList, value); } }
 
+        private ITimeClockManagerService _timeClockManagerService;
 
-        public ViewAlarmViewModel(IRegionManager regionManager, INotifyIcon notify):
-            base(regionManager, notify)
+        public ViewAlarmViewModel(IRegionManager regionManager, ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify, ITimeClockManagerService timeClockManagerService) :
+            base(regionManager, commandCore, eventAggregator, notify)
         {
-            AlarmList = new()
-            {
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник2", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник3", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник4", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
-                new AlarmModel() { Id = Guid.NewGuid(), Name = "Будильник5", Time = DateTime.Now, IsEnable = true },
+            _timeClockManagerService = timeClockManagerService;
+            AlarmList = new(_timeClockManagerService.GetAlarmList());
+            EventAggregator.GetEvent<DeleteAlarmEvent>().Subscribe(DeleteAlarm);
+       
+        }
 
-            };
+        private void DeleteAlarm(Guid obj)
+        {
+            AlarmList.Remove(AlarmList.FirstOrDefault(q => q.Id == obj));
+        }
+
+        protected override void AlarmAdd()
+        {
+            EventAggregator.GetEvent<VisibleAddAlarmModalEvent>().Publish(true);
+        }
+
+        
+
+        protected override void DeleteAlarm()
+        {
+
+        }
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            CommandCore.DeleteAlarmCommand.RegisterCommand(DeleteAlarmCommand);
+        }
+        public override void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            CommandCore.DeleteAlarmCommand.UnregisterCommand(DeleteAlarmCommand);
         }
     }
 }

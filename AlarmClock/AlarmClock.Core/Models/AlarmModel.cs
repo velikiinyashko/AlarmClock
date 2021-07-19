@@ -10,7 +10,8 @@ namespace AlarmClock.Core.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
+        public string AlarmSounds { get; set; }
         public bool IsEnable { get; set; }
     }
 }

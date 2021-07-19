@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace AlarmClock.Services.Interfaces
-{
-    public interface INotifyIcon
+namespace AlarmClock.Core.Interfaces
+{    public interface INotifyIcon
     {
         void Message(string Message);
         void Exit();

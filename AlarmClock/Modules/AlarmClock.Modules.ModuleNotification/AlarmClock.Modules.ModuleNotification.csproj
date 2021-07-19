@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AlarmClock.Core\AlarmClock.Core.csproj" />
     <ProjectReference Include="..\..\Services\AlarmClock.Services.Interfaces\AlarmClock.Services.Interfaces.csproj" />
   </ItemGroup>
 

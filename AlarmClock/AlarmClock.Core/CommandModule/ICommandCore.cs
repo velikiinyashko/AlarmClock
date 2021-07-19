@@ -6,5 +6,6 @@ namespace AlarmClock.Core.CommandModule
     {
         CompositeCommand AlarmsViewCommand { get; }
         CompositeCommand AlaramAddCommand { get; }
+        CompositeCommand DeleteAlarmCommand { get; }
     }
 }

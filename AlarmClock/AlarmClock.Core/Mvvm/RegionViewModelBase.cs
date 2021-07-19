@@ -1,9 +1,9 @@
 ﻿using Prism.Regions;
 using System;
-using AlarmClock.Services.Interfaces;
 using Prism.Events;
 using AlarmClock.Core.CommandModule;
 using Prism.Commands;
+using AlarmClock.Core.Interfaces;
 
 namespace AlarmClock.Core.Mvvm
 {
@@ -15,8 +15,9 @@ namespace AlarmClock.Core.Mvvm
         protected ICommandCore CommandCore { get; private set; }
         public DelegateCommand AlarmViewCommand { get; private set; }
         public DelegateCommand AlaramAddCommand { get; private set; }
+        public DelegateCommand DeleteAlarmCommand { get; private set; }
 
-        public RegionViewModelBase(IRegionManager regionManager,ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify)
+        public RegionViewModelBase(IRegionManager regionManager, ICommandCore commandCore, IEventAggregator eventAggregator, INotifyIcon notify)
         {
             CommandCore = commandCore;
             RegionManager = regionManager;
@@ -24,6 +25,7 @@ namespace AlarmClock.Core.Mvvm
             EventAggregator = eventAggregator;
             AlarmViewCommand = new(AlarmsView);
             AlaramAddCommand = new(AlarmAdd);
+            DeleteAlarmCommand = new(DeleteAlarm);
         }
 
         public RegionViewModelBase(IRegionManager regionManager, INotifyIcon notify)
@@ -35,10 +37,16 @@ namespace AlarmClock.Core.Mvvm
         #region комманды
 
         protected virtual void AlarmsView() { }
-       /// <summary>
-       /// добавление будильника
-       /// </summary>
+
+        /// <summary>
+        /// добавление будильника
+        /// </summary>
         protected virtual void AlarmAdd() { }
+
+        /// <summary>
+        /// удаление будильника
+        /// </summary>
+        protected virtual void DeleteAlarm() { }
 
         #endregion
 

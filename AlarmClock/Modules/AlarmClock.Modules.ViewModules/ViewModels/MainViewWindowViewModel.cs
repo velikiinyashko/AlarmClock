@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AlarmClock.Core.Mvvm;
-using AlarmClock.Services.Interfaces;
 using Prism.Regions;
 using AlarmClock.Core.Event;
 using Prism.Events;
 using AlarmClock.Core.CommandModule;
+using AlarmClock.Core.Interfaces;
 
 namespace AlarmClock.Modules.ViewModules.ViewModels
 {
