@@ -48,7 +48,13 @@ namespace AlarmClock.Modules.ModuleAlarm.ViewModels
         /// <param name="obj">идентификатор будильника в списке</param>
         private void DeleteAlarm(Guid obj)
         {
-            AlarmList.Remove(AlarmList.FirstOrDefault(q => q.Id == obj));
+            var item = AlarmList.FirstOrDefault(q => q.Id == obj);
+            if (item != null)
+            {
+                AlarmList.Remove(item);
+                _timeClockManagerService.RemoveAlarm(item);
+            }
+            AlarmList = new(_timeClockManagerService.GetAlarmList());
         }
         /// <summary>
         /// открытие модального окна для добавления будильника будильника
